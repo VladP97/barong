@@ -40,6 +40,8 @@ module Barong
 
       user = User.find_by!(uid: session[:uid])
 
+      validate_session!(user)
+
       unless user.state.in?(%w[active pending])
         error!({ errors: ['authz.user_not_active'] }, 401)
       end
@@ -47,6 +49,15 @@ module Barong
       validate_permissions!(user)
 
       user # returns user(whose session is inside cookie)
+    end
+
+    def validate_session!(user)
+      if request_params(user) != valid_session_hash || Time.now.to_i > session[:expire_time]
+        session.destroy
+        error!({ errors: ['authz.invalid_session'] }, 401)
+      else
+        session[:expire_time] = Time.now.to_i + Barong::App.config.session_expire_time
+      end
     end
 
     # api key validations
@@ -148,6 +159,24 @@ module Barong
     # encode helper method
     def codec
       @_codec ||= Barong::JWT.new(key: Barong::App.config.keystore.private_key)
+    end
+
+    # options from request
+    def request_params(user)
+      {
+        user_ip: @request.ip,
+        user_agent: @request.env['HTTP_USER_AGENT'],
+        uid: user.uid
+      }
+    end
+
+    # options from session
+    def valid_session_hash
+      {
+        user_ip: session[:user_ip],
+        user_agent: session[:user_agent],
+        uid: session[:uid]
+      }
     end
 
     # fetch authz rules from yml

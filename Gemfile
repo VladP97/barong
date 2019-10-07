@@ -3,14 +3,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '~> 2.6.5'
 
+gem 'aliyun-sdk',  '~> 0.7.0'
 gem 'api-pagination', '~> 4.8.2'
 
 gem 'env-tweaks', '~> 1.0.0'
 
-gem 'fog-google',  '~> 0.1.0'
-gem 'fog-aws',     '~> 2.0.1'
 gem 'fog-aliyun',  '~> 0.3.5'
-gem 'aliyun-sdk',  '~> 0.7.0'
+gem 'fog-aws',     '~> 2.0.1'
+gem 'fog-google',  '~> 0.1.0'
+gem 'hiredis', '~> 0.6.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use mysql as the database for Active Record
@@ -25,7 +26,6 @@ gem 'mini_racer', platforms: :ruby
 gem 'maxmind-db', '~> 1.0'
 
 gem 'kaminari'
-
 gem 'peatio', '~> 0.4.4'
 gem 'rack-cors', '~> 1.0.2'
 
