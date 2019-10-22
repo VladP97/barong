@@ -245,6 +245,8 @@ GEM
     pry-byebug (3.7.0)
       byebug (~> 11.0)
       pry (~> 0.10)
+    pry-nav (0.3.0)
+      pry (>= 0.9.10, < 0.13.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (3.1.1)
@@ -416,7 +418,9 @@ DEPENDENCIES
   mysql2 (>= 0.4.4, < 0.6.0)
   peatio (~> 0.4.4)
   phonelib (~> 0.6.0)
+  pry
   pry-byebug
+  pry-nav
   pry-rails
   puma (~> 3.11)
   rack-cors (~> 1.0.2)
