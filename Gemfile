@@ -27,7 +27,7 @@ gem 'maxmind-db', '~> 1.0'
 gem 'kaminari'
 
 gem 'peatio', '~> 0.4.4'
-gem 'rack-cors', '~> 1.0.2'
+gem 'rack-cors', '~> 1.0.2', require: 'rack/cors'
 
 # REST-like API framework for Ruby
 gem 'grape',        '~> 1.0'
